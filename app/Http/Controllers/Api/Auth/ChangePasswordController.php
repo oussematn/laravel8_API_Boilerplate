@@ -17,6 +17,11 @@ class ChangePasswordController extends Controller
      */
     public function store(ChangePasswordRequest $request)
     {
+        $request->validate([
+            "email" => "required|email",
+            "password" => "required|min:8"
+        ]);
+
         $user = User::where('email', '=', $request->get('email'))->first();
         $user->password = $request->get('password');
         $user->save();

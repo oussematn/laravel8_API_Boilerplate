@@ -19,6 +19,11 @@ class LoginController extends Controller
      */
     public function store(LoginRequest $request)
     {
+        $request->validate([
+            "email" => "required|email",
+            "password" => "required|min:8"
+        ]);
+
         $credentials = request(['email', 'password']);
 
         if (!$token = JWTAuth::attempt($credentials)) {

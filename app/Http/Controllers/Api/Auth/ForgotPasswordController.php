@@ -10,6 +10,10 @@ class ForgotPasswordController extends Controller
 {
     public function forgot()
     {
+        $request->validate([
+            "email" => "required|email",
+        ]);
+
         $credentials = request()->all();
         $email = $credentials["email"];
 
