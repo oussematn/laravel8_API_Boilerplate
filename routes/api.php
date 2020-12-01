@@ -20,10 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => 'api'], function ($router) {
     Route::get('/rest_password', function () {
-        return response()->json([
-            'message' => 'reseting password'
-        ]);
+        return view('auth.password_reset');
     })->name('password.reset');
+    Route::post('/password/reset', 'App\Http\Controllers\Api\Auth\ForgotPasswordController@reset');
 });
 
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
